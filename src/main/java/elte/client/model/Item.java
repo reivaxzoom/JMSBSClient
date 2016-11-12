@@ -1,33 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package edu.elte.client;
+package elte.client.model;
 
 import java.io.Serializable;
 import javax.money.NumberValue;
 
 /**
- *
+ * Define the client request for creating JMS messages
  * @author Xavier
  */
-public class ClientRequest implements Serializable{
+public class Item implements Serializable{
      private static final long serialVersionUID = 1L;
 
     private String name;
     private int amount ;
     private NumberValue unityPrice;
+    private String category;
 
-    public ClientRequest(String name, int amount) {
+    public Item(String name, int amount) {
         this.name = name;
         this.amount = amount;
     }
 
-    public ClientRequest(String name, int amount, NumberValue unityPrice) {
+    public Item(String name, int amount, NumberValue unityPrice) {
         this.name = name;
         this.amount = amount;
         this.unityPrice = unityPrice;
+    }
+    
+     public Item(String name, int amount, String category) {
+        this.name = name;
+        this.amount = amount;
+        this.category = category;
     }
     
     
@@ -51,10 +53,17 @@ public class ClientRequest implements Serializable{
         return unityPrice;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
     
-    @Override
+   @Override
     public String toString() {
-        return "ClientRequest{" + "name=" + name + ", amount=" + amount + '}';
+        return "ClientRequest{" + "name=" + name + ", amount=" + amount + ", category=" + category + '}';
     }
 
     

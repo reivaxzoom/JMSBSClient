@@ -1,4 +1,4 @@
-package edu.elte.view;
+package elte.client.view;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,8 +45,8 @@ public class OptionParser
             "timeout",
             "timeout in seconds to wait before exiting",
             "TIMEOUT",
-            "0",
-            Integer.class);
+            "2000",
+            Long.class);
     
     static final Option CON_OPTIONS = new Option(null,
             "con-option",
@@ -71,23 +71,21 @@ public class OptionParser
     
     private String usage;
     private String desc;
-    private String address;
     
     public OptionParser(String[] args, String usage, String desc){   
         this.usage = usage;
         this.desc  = desc;
         
         if (args.length == 0 || 
-           (args.length == 1 && (args[0].equals("-h") || args[0].equals("--help")))){
-            printHelp();
-        }
+                (args.length == 1 && (args[0].equals("-h") || args[0].equals("--help")))){
+                 printHelp();
+             }
         
-        address = args[args.length -1];
-        String[] ops = new String[args.length -1];
-        System.arraycopy(args, 0, ops, 0, ops.length);        
-        parseOpts(ops);
-        
-        System.out.println(optMap);
+	        String[] ops = new String[args.length];
+	        System.arraycopy(args, 0, ops, 0, ops.length);        
+	        parseOpts(ops);
+	        
+	        System.out.println(optMap);
         
         if (isHelp()){
             printHelp();
@@ -304,10 +302,10 @@ public class OptionParser
         private final String desc;
         private final String valueLabel;
         private final String defaultValue;
-        private final Class type;
+        private final Class<?> type;
         
         public Option(String shortForm, String longForm, String desc,
-                      String valueLabel, String defaultValue, Class type){
+                      String valueLabel, String defaultValue, Class<?> type){
             this.shortForm = shortForm;
             this.longForm = longForm;
             this.defaultValue = defaultValue;
@@ -328,7 +326,7 @@ public class OptionParser
             return defaultValue;
         }
         
-        public Class getType(){
+        public Class<?> getType(){
             return type;
         }    
         
