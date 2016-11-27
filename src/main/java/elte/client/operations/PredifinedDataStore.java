@@ -81,6 +81,7 @@ public class PredifinedDataStore {
         itemsSample.add(new Item("Detergent", rndIt.get(), "cleaners"));
         itemsSample.add(new Item("hikingboots", rndIt.get(), "shoes"));
         itemsSample.add(new Item("casual", rndIt.get(), "shoes"));
+        
         itemsSample.add(new Item("backpack", rndIt.get(), "sport"));
         itemsSample.add(new Item("tent", rndIt.get(), "sport"));
         itemsSample.add(new Item("soccershoes", rndIt.get(), "shoes"));
@@ -110,7 +111,20 @@ public class PredifinedDataStore {
         itemsSample.add(new Item("exercisebenches", rndIt.get(), "sport"));
         itemsSample.add(new Item("eyewear", rndIt.get(), "sport"));
         itemsSample.add(new Item("fieldhockeysticks", rndIt.get(), "sport"));
-        itemsSample.add(new Item("fieldhockeyballs", rndIt.get(), "sport"));
+        
+        itemsSample.add(new Item("nonslip floors", rndIt.get(), "gym"));
+        itemsSample.add(new Item("mirror", rndIt.get(), "gym"));
+        itemsSample.add(new Item("static bike", rndIt.get(), "gym"));
+        itemsSample.add(new Item("ketleball", rndIt.get(), "gym"));
+        itemsSample.add(new Item("weights", rndIt.get(), "gym"));
+        itemsSample.add(new Item("suspension trainer", rndIt.get(), "gym"));
+        itemsSample.add(new Item("storage racks", rndIt.get(), "gym"));
+        
+        itemsSample.add(new Item("handgrip", rndIt.get(), "fitness"));
+        itemsSample.add(new Item("strength bands", rndIt.get(), "fitness"));
+        itemsSample.add(new Item("Dumbbells 9 lbs", rndIt.get(), "fitness"));
+        itemsSample.add(new Item("jump rope", rndIt.get(), "fitness"));
+        
         itemsSample.add(new Item("gloves", rndIt.get(), "sport"));
         itemsSample.add(new Item("goalsposts", rndIt.get(), "sport"));
         itemsSample.add(new Item("goals", rndIt.get(), "sport"));
@@ -177,6 +191,16 @@ public class PredifinedDataStore {
         itemsSample.add(new Item("wheelchairsforcompetition", rndIt.get(), "sport"));
         itemsSample.add(new Item("windsurfers", rndIt.get(), "sport"));
         itemsSample.add(new Item("wrestlingmats&tatamis", rndIt.get(), "sport"));
+        
+        itemsSample.add(new Item("soccer balls", rndIt.get(), "futbol"));
+        itemsSample.add(new Item("shin guards", rndIt.get(), "futbol"));
+        itemsSample.add(new Item("goolkeeper gear", rndIt.get(), "futbol"));
+        itemsSample.add(new Item("portable soccer goal", rndIt.get(), "futbol"));
+        itemsSample.add(new Item("anckle support", rndIt.get(), "futbol"));
+        itemsSample.add(new Item("Cleats", rndIt.get(), "futbol"));
+        
+        
+        
         itemsSample.add(new Item("laptop", rndIt.get(), "hardware"));
         itemsSample.add(new Item("network cable", rndIt.get(), "hardware"));
         itemsSample.add(new Item("mouse", rndIt.get(), "hardware"));
@@ -194,62 +218,79 @@ public class PredifinedDataStore {
         itemsSample.add(new Item("light laptop", rndIt.get(), "computer"));
     }
 
-    public static Map<String, String> getRandomSampleRequestData() {
+    public static Map<String, Object> getRandomSampleRequestData() {
         Calendar expCal = Calendar.getInstance();
         String expDate = dateFormat.format(expCal.getTime());
         expCal.add(Calendar.DAY_OF_YEAR, rndIt.get());
         
-        List<Map<String, String>> listProperties = new ArrayList<>();
-        Map<String, String> prop1 = new HashMap<>();
+        List<Map<String, Object>> listProperties = new ArrayList<>();
+        Map<String, Object> prop1 = new HashMap<>();
         prop1.put("name", "Xavier");
         prop1.put("address", "street 1");
-        prop1.put("phone", "1111111111");
+        prop1.put("phone", "5936656565656");
         prop1.put("country", supplyEuContries.get());
         prop1.put("expDelivery", expDate);
-        prop1.put("comments", "It is needed for a conmemorative party ");
+        prop1.put("comments", "It is needed for a conmemorative party, traditional food server, customes party");
         prop1.put("deliverAddress", "street 1");
+        prop1.put("frecuent", Boolean.TRUE);
+        
 
-        Map<String, String> prop2 = new HashMap<>();
+        Map<String, Object> prop2 = new HashMap<>();
         prop2.put("name", "Nicolas");
         prop2.put("address", "Heroes street");
-        prop2.put("phone", "22222222222222");
+        prop2.put("phone", "3687898545648");
         prop2.put("country", supplyEuContries.get());
-        prop1.put("expDelivery", expDate);
+        prop2.put("expDelivery", expDate);
         prop2.put("comments", "it is for school assigment");
         prop2.put("deliverAddress", "devoi utca");
+        prop2.put("frecuent", Boolean.FALSE);
+        
+        Map<String, Object> prop6 = new HashMap<>();
+        prop6.put("name", "Gabriela");
+        prop6.put("address", "Huba ut");
+        prop6.put("phone", "3689938383882");
+        prop6.put("country", supplyEuContries.get());
+        prop6.put("expDelivery", expDate);
+        prop6.put("comments", "outdoor activities, hiking to the hill, next month");
+        prop6.put("deliverAddress", "Huba ut");
+        prop6.put("frecuent", Boolean.TRUE);
 
-        Map<String, String> prop3 = new HashMap<>();
+        Map<String, Object> prop3 = new HashMap<>();
         prop3.put("name", "Eva");
         prop3.put("address", "nemet utca");
-        prop3.put("phone", "1122334455");
+        prop3.put("phone", "361122334455");
         prop3.put("country", supplyEuContries.get());
-        prop1.put("expDelivery", expDate);
-        prop3.put("comments", "it is for home ");
+        prop3.put("expDelivery", expDate);
+        prop3.put("comments", "There will be an outdoor party");
         prop3.put("deliverAddress", "nemet utca");
+        prop3.put("frecuent", Boolean.TRUE);
 
-        Map<String, String> prop4 = new HashMap<>();
+        Map<String, Object> prop4 = new HashMap<>();
         prop4.put("name", "Laszlo");
         prop4.put("address", "street 4");
-        prop4.put("phone", "999999999999");
+        prop4.put("phone", "3644444444");
         prop4.put("country", supplyEuContries.get());
-        prop1.put("expDelivery", expDate);
-        prop4.put("comments", "for birthday party ");
+        prop4.put("expDelivery", expDate);
+        prop4.put("comments", "Tentative party association  ");
         prop4.put("deliverAddress", "street 1");
+        prop4.put("frecuent", Boolean.TRUE);
 
-        Map<String, String> prop5 = new HashMap<>();
+        Map<String, Object> prop5 = new HashMap<>();
         prop5.put("name", "Sally");
         prop5.put("address", "marinara utca");
-        prop5.put("phone", "44444444444444");
+        prop5.put("phone", "364444444444");
         prop5.put("country", supplyEuContries.get());
-        prop1.put("expDelivery", expDate);
-        prop5.put("comments", "project stuff");
+        prop5.put("expDelivery", expDate);
+        prop5.put("comments", "student project computer science, cables, adaptor and computer keyboard, may be a cellphone");
         prop5.put("deliverAddress", "marinara utca");
+        prop5.put("frecuent", Boolean.TRUE);
 
         listProperties.add(prop1);
         listProperties.add(prop2);
         listProperties.add(prop3);
         listProperties.add(prop4);
         listProperties.add(prop5);
+        listProperties.add(prop6);
 
         Collections.shuffle(listProperties);
         return listProperties.get(0);

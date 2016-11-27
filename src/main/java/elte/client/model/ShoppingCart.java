@@ -21,7 +21,7 @@ private static final long serialVersionUID = 1L;
     Locale spain = new Locale("ca", "ES");
     CurrencyUnit eur = Monetary.getCurrency(spain);
 
-    Map<String,String> reqDataObj;
+    Map<String,Object> reqDataObj;
 
     @Override
     public boolean add(Item e) {
@@ -60,11 +60,11 @@ private static final long serialVersionUID = 1L;
 
     
     
-    public Map<String, String> getReqDataObj() {
+    public Map<String, Object> getReqDataObj() {
         return reqDataObj;
     }
 
-    public void setReqDataObj(Map<String, String> reqDataObj) {
+    public void setReqDataObj(Map<String, Object> reqDataObj) {
         this.reqDataObj = reqDataObj;
     }
     

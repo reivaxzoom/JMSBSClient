@@ -8,8 +8,9 @@ import java.util.Date;
  *
  * @author Xavier
  */
-public class Header implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Header implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
 	private int id;
     private String ClientName;
     private String ClientAddress;
@@ -22,7 +23,16 @@ public class Header implements Serializable{
     private String comments;
     private String deliverAddress;
     private String category;
+    private Boolean frecuent;
 
+    public Boolean getFrecuent() {
+        return frecuent;
+    }
+
+    public void setFrecuent(Boolean frecuent) {
+        this.frecuent = frecuent;
+    }
+    
     public int getId() {
         return id;
     }

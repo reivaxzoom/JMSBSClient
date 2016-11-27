@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
@@ -44,9 +43,9 @@ import javax.jms.DeliveryMode;
 public class SampleListMessage {
 
      Supplier<Item> supplyClientRequest = PredifinedDataStore.supplyClientRequest;
-     Supplier<Map<String, String>> supplyClientData = PredifinedDataStore::getRandomSampleRequestData;
-     Supplier<Integer> rndBudget = SampleListMessage::rndBudget;
-     Supplier<Integer> rndId = SampleListMessage::rndId;
+     Supplier<Map<String, Object>> supplyClientData = PredifinedDataStore::getRandomSampleRequestData;
+     Supplier<Short> rndBudget = SampleListMessage::rndBudget;
+     Supplier<Short> rndId = SampleListMessage::rndId;
      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
      private List<ShoppingCart> listCars;
      static int  minBudget = 300, maxBudget = 600;
@@ -109,14 +108,15 @@ public class SampleListMessage {
 
         for (ShoppingCart shopCar : sampleShopCars) {
             String date = dateFormat.format(today.getTime());
-            String budget = String.valueOf(rndBudget.get());
-            int itemsNumber = shopCar.size();
-            Map<String, String> reqCliData = supplyClientData.get();
+            Short budget = rndBudget.get();
+            Integer itemsNumber = shopCar.size();
+            Map<String, Object> reqCliData = supplyClientData.get();
             reqCliData.put("id", id);
             reqCliData.put("subOrd", subOrd+"/"+sampleShopCars.size());
             reqCliData.put("date", date);
             reqCliData.put("budget", budget);
-            reqCliData.put("itemsNumber", String.valueOf(itemsNumber));
+            
+            reqCliData.put("itemNumber", itemsNumber);
             shopCar.getReqDataObj().putAll(reqCliData);
             reqTot.add(shopCar);
             subOrd=subOrd+1;
@@ -186,9 +186,19 @@ public class SampleListMessage {
             Iterator it = cart.getReqDataObj().entrySet().iterator();
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
-                m.setStringProperty(pair.getKey().toString(), pair.getValue().toString());
+                 if(pair.getValue() instanceof Short) {
+                    m.setShortProperty(pair.getKey().toString(), (Short)pair.getValue());
+                    }
+                   else if( pair.getValue() instanceof String){
+                        m.setStringProperty(pair.getKey().toString(), pair.getValue().toString());
+                    }
+                   else if(pair.getValue() instanceof Boolean){
+                        m.setBooleanProperty(pair.getKey().toString(), (Boolean)pair.getValue());
+                   }
+                else{
+                    Logger.getLogger(SampleListMessage.class.getName()).log(Level.SEVERE, "not recognized option");
+                }
             }
-            producer.send((Message) m);
             producer.send(m, DeliveryMode.PERSISTENT, getRandomPrio(), expTime.toEpochMilli());
             System.out.println("Sent: " + m);
             session.commit();
@@ -199,14 +209,14 @@ public class SampleListMessage {
         }
     }
     
-    private static int rndBudget(){
-        return rndNumber(minBudget, maxBudget);
+    private static short rndBudget(){
+        return (short)rndNumber(minBudget, maxBudget);
     }
     
     
-    private static int rndId(){
-        int min = 1, max = 100;
-        return rndNumber(min,max);
+    private static short rndId(){
+        short min = 1, max = 100;
+        return (short)rndNumber(min,max);
     }
 
     private static int rndNumber(int min, int max ){
